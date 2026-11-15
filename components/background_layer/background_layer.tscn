@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bkfh4413q1gg6"]
+
+[ext_resource type="Shader" uid="uid://d3o4otiu3d8mc" path="res://common/shaders/background.gdshader" id="1_721my"]
+[ext_resource type="Script" uid="uid://c75m6vyjl883" path="res://components/background_layer/background_layer.gd" id="1_q2ykq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4fuuu"]
+shader = ExtResource("1_721my")
+shader_parameter/bg = Color(3.308989e-08, 0.046689376, 0.071703784, 1)
+shader_parameter/primary = Color(0.9450566, 0, 0.28007305, 1)
+shader_parameter/secondary = Color(0.4443179, 0, 0.121360146, 1)
+shader_parameter/size = Vector2(480, 270)
+shader_parameter/primary_spacing = 30
+shader_parameter/secondary_spacing = 15
+shader_parameter/primary_width = 0.5
+shader_parameter/secondary_width = 0.5
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_721my"]
+
+[node name="BackgroundLayer" type="CanvasLayer" unique_id=1762240081]
+layer = -1
+follow_viewport_enabled = true
+script = ExtResource("1_q2ykq")
+
+[node name="Background" type="TextureRect" parent="." unique_id=932397680]
+material = SubResource("ShaderMaterial_4fuuu")
+instance_shader_parameters/offset = Vector2(0.5, 0.5)
+instance_shader_parameters/progress = 0.0
+custom_maximum_size = Vector2(480, 270)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_721my")
