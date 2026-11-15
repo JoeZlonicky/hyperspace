@@ -46,7 +46,7 @@ func check_for_victory() -> void:
 func _on_enemy_destroyed(enemy: Enemy) -> void:
 	hit_sfx.play()
 	enemies.erase(enemy)
-	check_for_victory()
+	#check_for_victory()
 
 
 # Random enemy shoots every X seconds

@@ -1,31 +1,124 @@
 [gd_scene format=3 uid="uid://dfq6d3x5qit4i"]
 
 [ext_resource type="Script" uid="uid://64eirvsc1toh" path="res://components/player/player.gd" id="1_waih8"]
-[ext_resource type="Texture2D" uid="uid://owoiffrqo06x" path="res://components/player/player.png" id="2_ph1f6"]
+[ext_resource type="Shader" uid="uid://cyx4lruovyp34" path="res://common/shaders/shape.gdshader" id="2_ph1f6"]
 [ext_resource type="AudioStream" uid="uid://bivj2n8vc2pld" path="res://common/sfx/player_shoot.wav" id="3_ph1f6"]
 
+[sub_resource type="Curve" id="Curve_wa6cj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ph1f6"]
+curve = SubResource("Curve_wa6cj")
+
+[sub_resource type="Curve" id="Curve_ph1f6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wa6cj"]
+curve = SubResource("Curve_ph1f6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_87uf6"]
+particle_flag_disable_z = true
+angle_min = 45.00001
+angle_max = 45.00001
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_wa6cj")
+alpha_curve = SubResource("CurveTexture_ph1f6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_87uf6"]
+shader = ExtResource("2_ph1f6")
+shader_parameter/primary = Color(0, 0.101960786, 0.043137256, 1)
+shader_parameter/vertices = 3
+
+[sub_resource type="ExternalTexture" id="ExternalTexture_5i0tg"]
+size = Vector2(40, 40)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ph1f6"]
+shader = ExtResource("2_ph1f6")
+shader_parameter/primary = Color(0, 1, 0.09019608, 1)
+shader_parameter/vertices = 3
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1hevo"]
-size = Vector2(128, 32)
+size = Vector2(22, 26)
 
 [node name="Player" type="CharacterBody2D" unique_id=1901416476]
 collision_layer = 2
 script = ExtResource("1_waih8")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2090147429]
+modulate = Color(0, 1, 0.09019608, 1)
+position = Vector2(-14, -6)
+amount = 32
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_87uf6")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=637298455]
+modulate = Color(0, 1, 0.09019608, 1)
+position = Vector2(-14, 6)
+amount = 32
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_87uf6")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=520121163]
-position = Vector2(0, -8)
-texture = ExtResource("2_ph1f6")
+material = SubResource("ShaderMaterial_87uf6")
+rotation = 1.5707964
+scale = Vector2(0.8, 1)
+texture = SubResource("ExternalTexture_5i0tg")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Sprite2D" unique_id=1529484566]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_ph1f6")
+position = Vector2(8.75, -2.980232e-07)
+scale = Vector2(0.40000004, 1)
+texture = SubResource("ExternalTexture_5i0tg")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Sprite2D" unique_id=1615095233]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_ph1f6")
+position = Vector2(-8.75, 2.980232e-07)
+scale = Vector2(0.40000004, 1)
+texture = SubResource("ExternalTexture_5i0tg")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D" unique_id=370775559]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_ph1f6")
+scale = Vector2(1.2, 1.2)
+texture = SubResource("ExternalTexture_5i0tg")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Sprite2D" unique_id=252432197]
+material = SubResource("ShaderMaterial_ph1f6")
+position = Vector2(0, 5)
+scale = Vector2(0.4, 0.4)
+texture = SubResource("ExternalTexture_5i0tg")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Sprite2D" unique_id=1442908468]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_ph1f6")
+position = Vector2(-6.999999, 11)
+scale = Vector2(0.4, 0.4)
+texture = SubResource("ExternalTexture_5i0tg")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Sprite2D" unique_id=1796612120]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_ph1f6")
+position = Vector2(7, 10.999999)
+scale = Vector2(0.4, 0.4)
+texture = SubResource("ExternalTexture_5i0tg")
 
 [node name="ProjectileSpawnPosition" type="Marker2D" parent="." unique_id=487336667]
 unique_name_in_owner = true
-position = Vector2(0, -26)
+position = Vector2(16, -7)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1014643547]
-position = Vector2(4.7683716e-07, -4.3711346e-08)
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_1hevo")
 
 [node name="ShootCooldown" type="Timer" parent="." unique_id=1887080598]
 unique_name_in_owner = true
-wait_time = 0.5
+wait_time = 0.25
 one_shot = true
 
 [node name="ShootSFX" type="AudioStreamPlayer" parent="." unique_id=359185508]

@@ -7,8 +7,13 @@
 [ext_resource type="AudioStream" uid="uid://o44jal8svjmx" path="res://common/sfx/victory.wav" id="5_dxrkv"]
 [ext_resource type="PackedScene" uid="uid://bkfh4413q1gg6" path="res://components/background_layer/background_layer.tscn" id="6_5i0tg"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5i0tg"]
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vasa2"]
 normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bdhmt"]
+normal = Vector2(0, 1)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h7iqs"]
 normal = Vector2(-1, 0)
@@ -45,49 +50,36 @@ autostart = true
 unique_name_in_owner = true
 
 [node name="Enemy" parent="EnemyContainer" unique_id=361587624 instance=ExtResource("2_4fuuu")]
-position = Vector2(31, 18)
-
-[node name="Enemy2" parent="EnemyContainer" unique_id=1888119020 instance=ExtResource("2_4fuuu")]
-position = Vector2(99, 21)
-
-[node name="Enemy3" parent="EnemyContainer" unique_id=1085152164 instance=ExtResource("2_4fuuu")]
-position = Vector2(180, 22)
-
-[node name="Enemy4" parent="EnemyContainer" unique_id=256644826 instance=ExtResource("2_4fuuu")]
-position = Vector2(252, 15)
-
-[node name="Enemy5" parent="EnemyContainer" unique_id=609370896 instance=ExtResource("2_4fuuu")]
-position = Vector2(356, 20)
-
-[node name="Enemy6" parent="EnemyContainer" unique_id=802808623 instance=ExtResource("2_4fuuu")]
-position = Vector2(40, 95)
-
-[node name="Enemy7" parent="EnemyContainer" unique_id=981994627 instance=ExtResource("2_4fuuu")]
-position = Vector2(112, 92)
-
-[node name="Enemy8" parent="EnemyContainer" unique_id=1523264915 instance=ExtResource("2_4fuuu")]
-position = Vector2(177, 89)
-
-[node name="Enemy9" parent="EnemyContainer" unique_id=1936060108 instance=ExtResource("2_4fuuu")]
-position = Vector2(252, 87)
-
-[node name="Enemy10" parent="EnemyContainer" unique_id=28155152 instance=ExtResource("2_4fuuu")]
-position = Vector2(359, 91)
+position = Vector2(415, 134)
 
 [node name="Player" parent="." unique_id=1901416476 instance=ExtResource("2_vasa2")]
 unique_name_in_owner = true
-position = Vector2(964, 1064)
+position = Vector2(19, 140)
 
-[node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=1040491169]
-position = Vector2(1, 1080)
+[node name="BottomBoundary" type="StaticBody2D" parent="." unique_id=1040491169]
+position = Vector2(480, 270)
+metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=1663045548]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBoundary" unique_id=1663045548]
+shape = SubResource("WorldBoundaryShape2D_5i0tg")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=238291461]
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=497124483]
 shape = SubResource("WorldBoundaryShape2D_vasa2")
 
-[node name="RightBoundary" type="StaticBody2D" parent="." unique_id=1895064204]
-position = Vector2(1920, 1080)
+[node name="TopBoundary" type="StaticBody2D" parent="." unique_id=1895064204]
+metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=839646617]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopBoundary" unique_id=839646617]
+shape = SubResource("WorldBoundaryShape2D_bdhmt")
+
+[node name="RightBoundary" type="StaticBody2D" parent="." unique_id=674233532]
+position = Vector2(480, 270)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=386084707]
 shape = SubResource("WorldBoundaryShape2D_h7iqs")
 
 [node name="HitSFX" type="AudioStreamPlayer" parent="." unique_id=1533403744]
