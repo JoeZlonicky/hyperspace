@@ -22,103 +22,134 @@ curve = SubResource("Curve_ph1f6")
 particle_flag_disable_z = true
 angle_min = 45.00001
 angle_max = 45.00001
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 59.039997
+initial_velocity_max = 59.039997
 gravity = Vector3(0, 0, 0)
 scale_min = 4.0
 scale_max = 4.0
 scale_curve = SubResource("CurveTexture_wa6cj")
 alpha_curve = SubResource("CurveTexture_ph1f6")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_87uf6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ph1f6"]
 shader = ExtResource("2_ph1f6")
-shader_parameter/primary = Color(0, 0.101960786, 0.043137256, 1)
+shader_parameter/primary = Color(1, 1, 1, 1)
 shader_parameter/vertices = 3
 
 [sub_resource type="ExternalTexture" id="ExternalTexture_5i0tg"]
 size = Vector2(40, 40)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ph1f6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_87uf6"]
 shader = ExtResource("2_ph1f6")
-shader_parameter/primary = Color(0, 1, 0.09019608, 1)
+shader_parameter/primary = Color(0, 0.101960786, 0.043137256, 1)
 shader_parameter/vertices = 3
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1hevo"]
-size = Vector2(22, 26)
 
 [node name="Player" type="CharacterBody2D" unique_id=1901416476]
 collision_layer = 2
 script = ExtResource("1_waih8")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2090147429]
+[node name="TopEngineParticles" type="GPUParticles2D" parent="." unique_id=2090147429]
 modulate = Color(0, 1, 0.09019608, 1)
-position = Vector2(-14, -6)
+position = Vector2(-13, -6)
 amount = 32
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_87uf6")
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=637298455]
+[node name="BottomEngineParticles" type="GPUParticles2D" parent="." unique_id=637298455]
 modulate = Color(0, 1, 0.09019608, 1)
-position = Vector2(-14, 6)
+position = Vector2(-13, 6)
 amount = 32
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_87uf6")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=520121163]
+[node name="Sprite" type="Node2D" parent="." unique_id=711747174]
+
+[node name="Details" type="Node2D" parent="Sprite" unique_id=2101059877]
+modulate = Color(0, 1, 0.09019608, 1)
+
+[node name="BottomBarrel" type="Sprite2D" parent="Sprite/Details" unique_id=1529484566]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ph1f6")
+position = Vector2(-20, 7)
+rotation = 1.5707964
+scale = Vector2(0.3, 1)
+texture = SubResource("ExternalTexture_5i0tg")
+offset = Vector2(0, -20)
+
+[node name="TopBarrel" type="Sprite2D" parent="Sprite/Details" unique_id=1615095233]
+unique_name_in_owner = true
+show_behind_parent = true
+material = SubResource("ShaderMaterial_ph1f6")
+position = Vector2(-20, -7)
+rotation = 1.5707964
+scale = Vector2(0.3, 1)
+texture = SubResource("ExternalTexture_5i0tg")
+offset = Vector2(0, -20)
+
+[node name="Outline" type="Sprite2D" parent="Sprite/Details" unique_id=370775559]
+material = SubResource("ShaderMaterial_ph1f6")
+rotation = 1.5707964
+scale = Vector2(1, 1.2)
+texture = SubResource("ExternalTexture_5i0tg")
+
+[node name="TopEngine" type="Sprite2D" parent="Sprite/Details" unique_id=1442908468]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_ph1f6")
+position = Vector2(-10, -6)
+rotation = 1.5707964
+scale = Vector2(0.3, 0.4)
+texture = SubResource("ExternalTexture_5i0tg")
+
+[node name="BottomEngine" type="Sprite2D" parent="Sprite/Details" unique_id=1796612120]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_ph1f6")
+position = Vector2(-10, 6.0000005)
+rotation = 1.5707964
+scale = Vector2(0.3, 0.4)
+texture = SubResource("ExternalTexture_5i0tg")
+
+[node name="BaseColor" type="Sprite2D" parent="Sprite" unique_id=520121163]
 material = SubResource("ShaderMaterial_87uf6")
 rotation = 1.5707964
 scale = Vector2(0.8, 1)
 texture = SubResource("ExternalTexture_5i0tg")
 
-[node name="Sprite2D6" type="Sprite2D" parent="Sprite2D" unique_id=1529484566]
-show_behind_parent = true
+[node name="Center" type="Sprite2D" parent="Sprite" unique_id=1800357117]
+modulate = Color(0, 0.27450982, 0.08235294, 1)
 material = SubResource("ShaderMaterial_ph1f6")
-position = Vector2(8.75, -2.980232e-07)
-scale = Vector2(0.40000004, 1)
+position = Vector2(-3.2, 0)
+rotation = -4.712389
+scale = Vector2(0.4, 0.6)
 texture = SubResource("ExternalTexture_5i0tg")
 
-[node name="Sprite2D7" type="Sprite2D" parent="Sprite2D" unique_id=1615095233]
-show_behind_parent = true
+[node name="AmmoDisplay" type="Node2D" parent="Sprite" unique_id=1339516947]
+unique_name_in_owner = true
+position = Vector2(-8.1, 0)
+
+[node name="Center" type="Sprite2D" parent="Sprite/AmmoDisplay" unique_id=252432197]
+modulate = Color(0, 1, 0.09019608, 1)
 material = SubResource("ShaderMaterial_ph1f6")
-position = Vector2(-8.75, 2.980232e-07)
-scale = Vector2(0.40000004, 1)
+position = Vector2(4.85, 0)
+rotation = 1.5707964
+scale = Vector2(0.4, 0.6)
 texture = SubResource("ExternalTexture_5i0tg")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D" unique_id=370775559]
-show_behind_parent = true
-material = SubResource("ShaderMaterial_ph1f6")
-scale = Vector2(1.2, 1.2)
-texture = SubResource("ExternalTexture_5i0tg")
-
-[node name="Sprite2D3" type="Sprite2D" parent="Sprite2D" unique_id=252432197]
-material = SubResource("ShaderMaterial_ph1f6")
-position = Vector2(0, 5)
-scale = Vector2(0.4, 0.4)
-texture = SubResource("ExternalTexture_5i0tg")
-
-[node name="Sprite2D4" type="Sprite2D" parent="Sprite2D" unique_id=1442908468]
-show_behind_parent = true
-material = SubResource("ShaderMaterial_ph1f6")
-position = Vector2(-6.999999, 11)
-scale = Vector2(0.4, 0.4)
-texture = SubResource("ExternalTexture_5i0tg")
-
-[node name="Sprite2D5" type="Sprite2D" parent="Sprite2D" unique_id=1796612120]
-show_behind_parent = true
-material = SubResource("ShaderMaterial_ph1f6")
-position = Vector2(7, 10.999999)
-scale = Vector2(0.4, 0.4)
-texture = SubResource("ExternalTexture_5i0tg")
-
-[node name="ProjectileSpawnPosition" type="Marker2D" parent="." unique_id=487336667]
+[node name="TopProjectileSpawnPosition" type="Marker2D" parent="." unique_id=487336667]
 unique_name_in_owner = true
 position = Vector2(16, -7)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1014643547]
-position = Vector2(1, 0)
-shape = SubResource("RectangleShape2D_1hevo")
+[node name="BottomProjectileSpawnPosition" type="Marker2D" parent="." unique_id=1234177746]
+unique_name_in_owner = true
+position = Vector2(16, 7)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1527965913]
+visible = false
+polygon = PackedVector2Array(-10, -13, 19, 0, -10, 13)
 
 [node name="ShootCooldown" type="Timer" parent="." unique_id=1887080598]
 unique_name_in_owner = true
-wait_time = 0.25
+wait_time = 0.125
 one_shot = true
 
 [node name="ShootSFX" type="AudioStreamPlayer" parent="." unique_id=359185508]

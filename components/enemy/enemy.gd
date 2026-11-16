@@ -6,6 +6,8 @@ signal destroyed
 
 const PROJECTILE_SCENE := preload("uid://dpieyslanfybp") as PackedScene
 
+var health: int = 10
+
 @onready var shoot_sfx: AudioStreamPlayer = %ShootSFX
 @onready var projectile_spawn_position: Marker2D = %ProjectileSpawnPosition
 
@@ -24,5 +26,9 @@ func shoot() -> void:
 
 # Take damage (destroyed)
 func hit() -> void:
+	health -= 1
+	if health >= 1:
+		return
+	
 	destroyed.emit()
 	queue_free()

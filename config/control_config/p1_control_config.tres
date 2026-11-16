@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ControlConfig" format=3 uid="uid://rdu0ef6uidjs"]
+
+[ext_resource type="Script" uid="uid://bqnv5tf0btotx" path="res://config/control_config/control_config.gd" id="1_v6rwv"]
+
+[resource]
+script = ExtResource("1_v6rwv")
+up_input = &"p1_move_up"
+right_input = &"p1_move_right"
+down_input = &"p1_move_down"
+left_input = &"p1_move_left"
+shoot_input = &"p1_shoot"
+metadata/_custom_type_script = "uid://bqnv5tf0btotx"

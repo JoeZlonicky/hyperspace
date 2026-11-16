@@ -1,17 +1,21 @@
 [gd_scene format=3 uid="uid://c81lpnhmfbods"]
 
 [ext_resource type="Script" uid="uid://bl5msqwxq52lk" path="res://components/enemy/enemy.gd" id="1_8ajy2"]
-[ext_resource type="Shader" uid="uid://dns7ejheisgna" path="res://components/enemy/enemy.gdshader" id="2_mdji8"]
+[ext_resource type="Shader" uid="uid://cyx4lruovyp34" path="res://common/shaders/shape.gdshader" id="2_mdji8"]
 [ext_resource type="AudioStream" uid="uid://bjjyy4j7f7dfc" path="res://common/sfx/enemy_shoot.wav" id="3_mdji8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8ajy2"]
 shader = ExtResource("2_mdji8")
+shader_parameter/primary = Color(0.101960786, 0, 0, 1)
+shader_parameter/vertices = 6
 
 [sub_resource type="ExternalTexture" id="ExternalTexture_wd5ij"]
-size = Vector2(40, 40)
+size = Vector2(60, 60)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6usr"]
-size = Vector2(40, 40)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mdji8"]
+shader = ExtResource("2_mdji8")
+shader_parameter/primary = Color(1, 0, 0, 1)
+shader_parameter/vertices = 6
 
 [node name="Enemy" type="CharacterBody2D" unique_id=361587624]
 collision_layer = 4
@@ -20,18 +24,20 @@ script = ExtResource("1_8ajy2")
 
 [node name="BaseSprite" type="Sprite2D" parent="." unique_id=1372297071]
 material = SubResource("ShaderMaterial_8ajy2")
-instance_shader_parameters/bg_color = Color(0.20696172, 0, 0.01833961, 1)
-instance_shader_parameters/outline_color = Color(0.9450566, 0, 0.28007305, 1)
-instance_shader_parameters/outline_width = 1.0
-instance_shader_parameters/size = Vector2(40, 40)
+texture = SubResource("ExternalTexture_wd5ij")
+
+[node name="BaseSprite2" type="Sprite2D" parent="BaseSprite" unique_id=157387783]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_mdji8")
+scale = Vector2(1.1, 1.1)
 texture = SubResource("ExternalTexture_wd5ij")
 
 [node name="ProjectileSpawnPosition" type="Marker2D" parent="." unique_id=1302589044]
 unique_name_in_owner = true
-position = Vector2(0, 20)
+position = Vector2(-15, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1948681692]
-shape = SubResource("RectangleShape2D_q6usr")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=485466050]
+polygon = PackedVector2Array(-8, -13, 8, -13, 15, 0, 8, 13, -8, 13, -15, 0)
 
 [node name="ShootSFX" type="AudioStreamPlayer" parent="." unique_id=1669769789]
 unique_name_in_owner = true

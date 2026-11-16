@@ -3,6 +3,12 @@ shader_type canvas_item;
 uniform vec4 primary : source_color;
 uniform int vertices = 3;
 
+varying flat vec4 modulate;
+
+void vertex() {
+	modulate = COLOR;
+}
+
 // Adapted from https://thebookofshaders.com/07/
 void fragment() {
  	// Remap the space to -1. to 1.
@@ -19,5 +25,5 @@ void fragment() {
  	float d = cos(floor(0.5 + a / r) * r - a) * length(st);
  	vec3 color = vec3(1.0 - smoothstep(0.4, 0.41, d));
 	float alpha = length(color) < 1.0 ? 0.0 : 1.0;
- 	COLOR = primary * vec4(color, alpha);
+ 	COLOR = primary * vec4(color, alpha) * modulate;
 }
