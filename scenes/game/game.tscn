@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dmov0n6cflnxj"]
 
 [ext_resource type="Script" uid="uid://bsqssgbd1nc0c" path="res://scenes/game/game.gd" id="1_l1rk1"]
-[ext_resource type="PackedScene" uid="uid://c81lpnhmfbods" path="res://components/enemy/enemy.tscn" id="2_4fuuu"]
 [ext_resource type="PackedScene" uid="uid://dfq6d3x5qit4i" path="res://components/player/player.tscn" id="2_vasa2"]
 [ext_resource type="AudioStream" uid="uid://c0ffv1l8nwtck" path="res://common/sfx/hit.wav" id="4_4fuuu"]
 [ext_resource type="AudioStream" uid="uid://o44jal8svjmx" path="res://common/sfx/victory.wav" id="5_dxrkv"]
@@ -29,11 +28,9 @@ modulate = Color(1, 1, 1, 0.5568628)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1.0
-offset_bottom = 137.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -42,15 +39,17 @@ unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
 
+[node name="EnemySpawnTimer" type="Timer" parent="." unique_id=928319506]
+wait_time = 10.0
+autostart = true
+
 [node name="EnemyShootTimer" type="Timer" parent="." unique_id=478510158]
 unique_name_in_owner = true
 autostart = true
 
-[node name="EnemyContainer" type="Node2D" parent="." unique_id=2075337948]
+[node name="EnemySpawnPosition" type="Marker2D" parent="." unique_id=210676584]
 unique_name_in_owner = true
-
-[node name="Enemy" parent="EnemyContainer" unique_id=361587624 instance=ExtResource("2_4fuuu")]
-position = Vector2(415, 134)
+position = Vector2(512, 140)
 
 [node name="Player" parent="." unique_id=1901416476 instance=ExtResource("2_vasa2")]
 unique_name_in_owner = true
@@ -90,3 +89,5 @@ max_polyphony = 8
 [node name="VictorySFX" type="AudioStreamPlayer" parent="." unique_id=144659012]
 unique_name_in_owner = true
 stream = ExtResource("5_dxrkv")
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]

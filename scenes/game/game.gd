@@ -5,21 +5,17 @@ extends Node2D
 var enemies: Array[Enemy] = []
 
 @onready var enemy_shoot_timer: Timer = %EnemyShootTimer
-@onready var enemy_container: Node2D = %EnemyContainer
 @onready var announcement_label: Label = %AnnouncementLabel
 @onready var game_restart_delay: Timer = %GameRestartDelay
 @onready var player: Player = %Player
 @onready var hit_sfx: AudioStreamPlayer = %HitSFX
 @onready var victory_sfx: AudioStreamPlayer = %VictorySFX
+@onready var enemy_spawn_position: Marker2D = %EnemySpawnPosition
 
 
 # Game setup
 func _ready() -> void:
-	# Hook up all enemies in the enemy container node
-	for child in enemy_container.get_children():
-		if child is Enemy:
-			child.destroyed.connect(_on_enemy_destroyed.bind(child))
-			enemies.append(child)
+	_on_enemy_spawn_timer_timeout()
 	
 	# Signals
 	enemy_shoot_timer.timeout.connect(_on_enemy_shoot_timer_timeout)
@@ -73,3 +69,12 @@ func _on_player_destroyed() -> void:
 	announcement_label.text = "GAME OVER"
 	enemy_shoot_timer.stop()
 	game_restart_delay.start()
+
+
+func _on_enemy_spawn_timer_timeout() -> void:
+	var enemy_scene := load("uid://c81lpnhmfbods") as PackedScene
+	var enemy := enemy_scene.instantiate() as Enemy
+	add_child(enemy)
+	enemy.global_position = enemy_spawn_position.global_position
+	enemy.destroyed.connect(_on_enemy_destroyed.bind(enemy))
+	enemies.append(enemy)

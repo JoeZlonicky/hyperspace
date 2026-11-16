@@ -29,6 +29,11 @@ func set_collision_mask_enemy() -> void:
 
 # Attempt to damage what was hit
 func _on_body_entered(body: Object) -> void:
-	if body is Player or body is Enemy:
-		body.hit()
+	if body is Player:
+		var player := body as Player
+		player.hit()
+		queue_free()
+	if body is Enemy:
+		var enemy := body as Enemy
+		enemy.hit()
 		queue_free()
